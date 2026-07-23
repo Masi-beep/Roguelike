@@ -5,7 +5,6 @@ import tcod
 from engine import Engine
 from entity import Entity
 from game_map import GameMap
-import game_map
 from input_handlers import EventHandler
 
 def main() -> None:
