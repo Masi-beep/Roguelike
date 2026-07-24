@@ -20,9 +20,11 @@ class Action:
         """
         raise NotImplementedError()
 
+
 class EscapeAction(Action):
     def perform(self, engine:Engine, entity:Entity) -> None:
         raise SystemExit()
+
 
 class ActionWithDirection(Action):
     def __init__(self, dx:int, dy:int):
@@ -33,6 +35,17 @@ class ActionWithDirection(Action):
 
     def perform(self, engine:Engine, entity:Entity) -> None:
         raise NotImplementedError()
+
+
+class MeleeAction(ActionWithDirection):
+    def perform(self, engine:Engine, entity:Entity) -> None:
+        dest_x = entity.x + self.dx
+        dest_y = entity.y + self.dy
+        target = engine.game_map.get_blocking_entity_at_location(dest_x, dest_y)
+        if not target:
+            return # no entity to attack
+        print(f'you kick the {target.name}, much to its annoyance!')
+
 
 class MovementAction(ActionWithDirection):
 
