@@ -12,7 +12,12 @@ if TYPE_CHECKING:
     from entity import Entity
 
 class GameMap:
-    def __init__(self, width: int, height: int, Iterable[Entity] = ()):
+    def __init__(
+            self, 
+            width: int, 
+            height: int, 
+            entities: Iterable[Entity] = ()
+        ):
         self.width, self.height = width, height
         self.entities = set(entities)
         # fill the map with wall tiles
