@@ -41,7 +41,7 @@ class MeleeAction(ActionWithDirection):
     def perform(self, engine:Engine, entity:Entity) -> None:
         dest_x = entity.x + self.dx
         dest_y = entity.y + self.dy
-        target = engine.game_map.get_blocking_entity_at_location(dest_x, dest_y)
+        target = engine.game_map.get_blocking_entity_at_location(dest_x,dest_y)
         if not target:
             return # no entity to attack
         print(f'you kick the {target.name}, much to its annoyance!')
@@ -57,7 +57,18 @@ class MovementAction(ActionWithDirection):
             return # destination is out of bounds
         if not engine.game_map.tiles["walkable"][dest_x, dest_y]:
             return # destination blocked by tile
-        if engine.game_map.get_blocking_entity_at_location(dest_x, dest_y):
+        if engine.game_map.get_blocking_entity_at_location(dest_x,dest_y):
             return # destination blocked by an entity
 
         entity.move(self.dx, self.dy)
+
+
+class BumpAction(ActionWithDirection):
+    def perform(self, engine:Engine, entity:Entity) -> None:
+        dest_x = entity.x + self.dx
+        dest_y = entity.y + self.dy
+
+        if engine.game_map.get_blocking_entity_at_location(dest_x,dest_y):
+            return MeleeAction(self.dx, self.dy).perform(engine, entity)
+        else:
+            return MovementAction(self.dx, self.dy).perform(engine, entity)
