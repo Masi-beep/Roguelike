@@ -30,14 +30,7 @@ def main() -> None:
             '@', 
             (255, 255, 255)
             )
-    npc = Entity(
-            int(screen_width / 2 - 5),
-            int(screen_height / 2),
-            '@',
-            (255, 255, 0)
-            )
-    entities = {npc, player}
-
+    
     game_map = generate_dungeon(
             max_rooms=max_rooms,
             room_min_size=room_min_size,
@@ -47,7 +40,7 @@ def main() -> None:
             player=player
     )
 
-    engine = Engine(entities=entities,
+    engine = Engine(
                     event_handler=event_handler,
                     game_map=game_map,
                     player=player
