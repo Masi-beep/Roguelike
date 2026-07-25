@@ -1,5 +1,5 @@
 # entity class eoeoeo
-from _typeshed import Self
+from __future__ import annotations
 import copy
 
 from typing import Optional, Type, Tuple, TypeVar, TYPE_CHECKING
