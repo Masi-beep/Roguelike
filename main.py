@@ -58,9 +58,10 @@ def main() -> None:
                                             screen_height, 
                                             order="F")
         while True:
-            engine.render(console=root_console, context=context)
-            
-            engine.event_handler.handle_events()
+            root_console.clear()
+            engine.event_handler.on_render(console=root_console)
+            context.present(root_console)
+            engine.event_handler.handle_events(context)
 
 if __name__ == "__main__":
     main()
