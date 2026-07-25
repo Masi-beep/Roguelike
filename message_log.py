@@ -16,7 +16,7 @@ class Message:
     @property
     def full_text(self) -> str:
         """ full text of this message, including the count if necessary."""
-        if self.count >1:
+        if self.count > 1:
             return f"{self.plain_text} (x{self.count})"
         return self.plain_text
 
@@ -75,6 +75,6 @@ class MessageLog:
             for line in reversed(textwrap.wrap(message.full_text, width)):
                 console.print(x=x, y=y + y_offset, string=line, fg=message.fg)
                 y_offset -= 1
-                if y_offset <0:
+                if y_offset < 0:
                     return # no more space to print message
 
